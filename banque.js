@@ -14,6 +14,9 @@ let sumVal = sum.value;
 
 let index = 0
 
+let listeComptes = [];
+let accountExists = false;
+
 // Ce qui se passe quand on envoie le formulaire
 function getInfos() {
 
@@ -32,6 +35,7 @@ function getInfos() {
             if (valid) {
                 account.value = "";
                 console.log(accountNum);
+                checkAccountExists(accountNum)
             }
         }
         else {
@@ -58,6 +62,7 @@ function getInfos() {
         
         console.log(index)
         addTransaction(index);
+        addAccountList(index);
         index++
     }
     else {
@@ -78,6 +83,7 @@ function background () {
     }
 }
 
+//Fonction pour vérifier si la somme est valide
 function checkNumber(number) {
     if (isNaN(number)) {
         valid = false;
@@ -103,6 +109,7 @@ let element = document.getElementsByClassName('transaction');
 let accounts = document.getElementsByClassName('account');
 let sums = document.getElementsByClassName('sum')
 
+//Fonction pour ajouter une transaction
 function addTransaction(index) {
 
     const addDiv = document.createElement("div");
@@ -127,4 +134,40 @@ function addTransaction(index) {
 
     sums[index].textContent = 'a déposé '+sumVal;
 
+}
+
+let list = document.querySelector('#comptes');
+let accountList = document.getElementsByClassName('compteList');
+let accountName = document.getElementsByClassName('addedAccount');
+
+//Fonction pour ajouter un compte
+function addAccountList(index) {
+
+    if (!accountExists) {
+
+        const addDivAL = document.createElement("div");
+
+        addDivAL.classList.add('compteList')
+
+        list.appendChild(addDivAL);
+
+        const listAccount = document.createElement("span")
+
+        listAccount.classList.add('addedAccount')
+
+        accountList[index].appendChild(listAccount)
+
+        accountName[index].textContent = 'Compte '+accountNum+' ';
+
+    }
+
+}
+
+function checkAccountExists(compte) {
+    for (let i = 0; i <= listeComptes.length ;i++) {
+        console.log(listeComptes[i]+'YTY')
+        if (listeComptes[i] == compte) {
+            accountExists = true;
+        }
+    }
 }
