@@ -4,13 +4,15 @@ let sum = document.querySelector('#somme');
 
 button.addEventListener('click', getInfos)
 
+account.addEventListener('input', background)
 
-//account.style.backgroundColor = "#6eff33";
+
+
 // Ce qui se passe quand on envoie le formulaire
 function getInfos() {
 
     //On récupère le nom du compte
-    let accountNum = account.value
+    accountNum = account.value
 
     //On vérifie la validité du compte
     if (accountNum.length === 16) {
@@ -42,4 +44,14 @@ function getInfos() {
 
     //alert('La somme de', sum, 'a bien été déposée')
     
+}
+
+function background () {
+    let accountNum = account.value;
+    if (accountNum.length === 16) {
+        account.style.backgroundColor = "#6eff33";
+    }
+    else {
+        account.style.backgroundColor = "#FFFFFF";
+    }
 }
