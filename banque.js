@@ -7,20 +7,26 @@ button.addEventListener('click', getInfos)
 account.addEventListener('input', background)
 
 let valid = true;
+let error = 'none';
 
 // Ce qui se passe quand on envoie le formulaire
 function getInfos() {
+
+    error = 'none';
+    valid = true;
 
     //On récupère le nom du compte
     let accountNum = account.value
 
     //On vérifie la validité du compte
     if (accountNum.length === 16) {
-        account.value = "";
-        console.log(accountNum);
+        if (valid) {
+            account.value = "";
+            console.log(accountNum);
+        }
     }
     else {
-        alert('Pas la bonne longueur')
+        error = 'compte'
         valid = false;
     }
 
@@ -29,22 +35,29 @@ function getInfos() {
 
     //On vérifie la validité de la somme entrée
     if (isNaN(sumVal)) {
-        //alert('Entrez un nombre svp')
         valid = false;
+        error = 'somme'
     }
     else {
         if (sumVal <= 0) {
-            //console.log('Veuillez entrer un nombre valide')
             valid = false;
+            error = 'somme'
         }
         else {
-            sum.value = "";
-            console.log(sumVal);
+            if (valid) {
+                sum.value = "";
+                console.log(sumVal);
+            }
+            
         }
     }
 
+    //Envoi de l'alerte de confirmation
     if (valid) {
         alert('La somme de '+sumVal+' a bien été déposée')
+    }
+    else {
+        alert('Erreur sur le champ '+error)
     }
         
 }
